@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -42,7 +42,7 @@ button, a { font-family: inherit; color: inherit; }
 }
 .nav {
   pointer-events: auto; display: flex; align-items: center; gap: 18px;
-  max-width: min(100%, 520px); padding: 6px 8px 6px 16px; border-radius: 999px;
+  max-width: min(100%, 600px); padding: 6px 8px 6px 16px; border-radius: 999px;
   background: rgba(48, 48, 50, 0.55); border: 1px solid rgba(255, 255, 255, 0.12);
   -webkit-backdrop-filter: blur(22px); backdrop-filter: blur(22px);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
@@ -59,6 +59,17 @@ button, a { font-family: inherit; color: inherit; }
   -webkit-tap-highlight-color: transparent;
 }
 .seg button.is-on { background: rgba(22, 22, 24, 0.92); color: #fff; }
+.wa {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; padding: 0 16px 0 13px; border-radius: 999px; flex-shrink: 0;
+  background: #25d366; color: #fff; text-decoration: none;
+  font-size: 13px; font-weight: 600; letter-spacing: -0.01em;
+  transition: background 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.wa:hover { background: #1ebe5b; }
+.wa svg { display: block; flex-shrink: 0; }
+.wa:focus-visible, .seg button:focus-visible, .opt:focus-visible, .more:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
 /* ---------- stage ---------- */
 .stage { position: fixed; top: 0; left: 0; width: 100%; height: var(--vh); z-index: 1; overflow: hidden; }
@@ -170,6 +181,8 @@ button, a { font-family: inherit; color: inherit; }
   .logo span { font-size: 15px; }
   .seg { flex-shrink: 0; }
   .seg button { font-size: 11px; padding: 8px 10px; }
+  .wa { width: 44px; padding: 0; margin-left: auto; }
+  .wa span { display: none; }
   .hero-copy { padding: calc(76px + env(safe-area-inset-top, 0px)) max(14px, env(safe-area-inset-right, 0px)) 0 max(14px, env(safe-area-inset-left, 0px)); }
   .hero-copy h1 { font-size: clamp(22px, 6.2vw, 28px); line-height: 1.22; max-width: 100%; }
   .apps-ui {
@@ -205,6 +218,10 @@ button, a { font-family: inherit; color: inherit; }
   .tag { font-size: 10px; padding: 3px 6px; }
 }
 
+@media (max-width: 380px) {
+  .logo span { display: none; }
+}
+
 @media (max-height: 500px) and (orientation: landscape) {
   .hero-copy { padding-top: calc(64px + env(safe-area-inset-top, 0px)); }
   .hero-copy h1 { font-size: 20px; max-width: 24ch; }
@@ -219,7 +236,7 @@ button, a { font-family: inherit; color: inherit; }
 <body>
 <div class="boot" id="boot">
   <div class="bar"><i id="bootBar"></i></div>
-  <p id="bootPct">LOADING 0%</p>
+  <p id="bootPct">CARGANDO 0%</p>
 </div>
 
 <div class="nav-wrap">
@@ -232,16 +249,20 @@ button, a { font-family: inherit; color: inherit; }
       <span>cordex</span>
     </a>
     <div class="seg">
-      <button type="button" id="btnFull" class="is-on">Full mode</button>
-      <button type="button" id="btnOverview">Explore</button>
+      <button type="button" id="btnFull" class="is-on">Modo completo</button>
+      <button type="button" id="btnOverview">Explorar</button>
     </div>
+    <a class="wa" id="waBtn" href="https://wa.me/" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 20.5l1.2-4.2A8.5 8.5 0 1 1 8 19.4l-4.5 1.1z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8.6c.2-.5.5-.6.8-.6h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.5.6c-.1.1-.1.3 0 .5.6 1 1.4 1.8 2.4 2.4.2.1.4.1.5 0l.6-.6c.2-.2.4-.2.6-.1l1.6.8c.2.1.3.3.3.5v.5c0 .4-.2.7-.6.9-.8.4-1.8.4-2.9-.1-1.9-.9-3.4-2.4-4.3-4.3-.5-1-.5-2.1-.1-2.6z" fill="white"/></svg>
+      <span>WhatsApp</span>
+    </a>
   </nav>
 </div>
 
 <div class="stage" id="stage">
   <section class="layer hero" id="heroLayer">
     <div class="hero-copy">
-      <h1>We protect transport safer across all industries</h1>
+      <h1>Protegemos el transporte con más seguridad en todas las industrias</h1>
     </div>
     <div class="hero-media">
       <video id="heroVideo" muted playsinline webkit-playsinline preload="auto" disablepictureinpicture
@@ -276,7 +297,7 @@ button, a { font-family: inherit; color: inherit; }
       <div class="hotspot" aria-hidden="true"><i></i></div>
       <article class="card" id="card"></article>
     </div>
-    <a class="more" id="more" href="#">Learn more about…</a>
+    <a class="more" id="more" href="#">Más información sobre…</a>
   </section>
 </div>
 
@@ -293,42 +314,48 @@ button, a { font-family: inherit; color: inherit; }
     id + ".png&w=" + w + "&q=" + q;
 
   const APPS = [
-    { label: "Construction equipment", title: "Armatex CHG", more: "More about Armatex CHG",
+    { label: "Maquinaria de construcción", title: "Armatex CHG", more: "Más sobre Armatex CHG",
       thumb: IMG("hf_20260906_195408_3baa90af-104c-4651-a954-4c32d032f447", 640, 80),
       specs: [
-        { k: "Service temperature", v: "−55°C to +200°C" },
-        { k: "Impact resistance", v: "LV 312-3 X < 25" },
-        { k: "Wear resistance", tag: "ISO 6722-1 CLASS 4" }
+        { k: "Temperatura de servicio", v: "−55°C a +200°C" },
+        { k: "Resistencia al impacto", v: "LV 312-3 X < 25" },
+        { k: "Resistencia al desgaste", tag: "ISO 6722-1 CLASE 4" }
       ] },
-    { label: "Electric & hybrid", title: "Armatex VHG10 Purple", more: "More about Armatex VHG10",
+    { label: "Eléctricos e híbridos", title: "Armatex VHG10 Purple", more: "Más sobre Armatex VHG10",
       thumb: IMG("hf_20260906_195510_80256fb7-1e2d-4135-be89-85b9c9736604", 640, 80),
       specs: [
-        { k: "Service temperature", v: "−70°C to +225°C (Peaks at +300°C)" },
-        { k: "Impact resistance", v: "LV 312-3 X < 25" }
+        { k: "Temperatura de servicio", v: "−70°C a +225°C (picos de +300°C)" },
+        { k: "Resistencia al impacto", v: "LV 312-3 X < 25" }
       ] },
-    { label: "Buses and trucks", title: "Flexline PS", more: "More about Flexline PS",
+    { label: "Buses y camiones", title: "Flexline PS", more: "Más sobre Flexline PS",
       thumb: IMG("hf_20260906_195543_44e0ac0c-4c7b-4a94-a8b0-935bd48a1503", 640, 80),
       colors: ["#111", "#e85a1a", "#f4f4f4", "#7a4aa8"],
       specs: [
-        { k: "Service temperature", v: "−70°C to +150°C" },
-        { k: "Stretch ratio", v: "1:2" },
-        { k: "Wear resistance", tag: "ISO 6722-1 CLASS 4 (4,000 – 14,999 CYCLES)" }
+        { k: "Temperatura de servicio", v: "−70°C a +150°C" },
+        { k: "Relación de estiramiento", v: "1:2" },
+        { k: "Resistencia al desgaste", tag: "ISO 6722-1 CLASE 4 (4.000 – 14.999 CICLOS)" }
       ] },
-    { label: "Rail systems", title: "Flexline RX", more: "More about Flexline RX",
+    { label: "Sistemas ferroviarios", title: "Flexline RX", more: "Más sobre Flexline RX",
       thumb: IMG("hf_20260906_195629_69f05c67-a2fe-4235-a5ff-233c0bdda517", 640, 80),
       specs: [
-        { k: "Service temperature", v: "−50°C to +180°C" },
-        { k: "Fire performance", v: "EN 45545-2 HL3" },
-        { k: "Shock rating", v: "IEC 61373 Category 1" }
+        { k: "Temperatura de servicio", v: "−50°C a +180°C" },
+        { k: "Comportamiento ante el fuego", v: "EN 45545-2 HL3" },
+        { k: "Resistencia a vibraciones y golpes", v: "IEC 61373 Categoría 1" }
       ] },
-    { label: "Agricultural machines", title: "Armatex AG", more: "More about Armatex AG",
+    { label: "Maquinaria agrícola", title: "Armatex AG", more: "Más sobre Armatex AG",
       thumb: IMG("hf_20260906_195701_5e5cb558-d608-44b3-81af-6098c19701f9", 640, 80),
       specs: [
-        { k: "Service temperature", v: "−40°C to +150°C" },
-        { k: "Dirt & moisture", v: "IP6K9K sealed jackets" },
-        { k: "Wear resistance", tag: "ISO 6722-1 CLASS 3" }
+        { k: "Temperatura de servicio", v: "−40°C a +150°C" },
+        { k: "Suciedad y humedad", v: "Fundas selladas IP6K9K" },
+        { k: "Resistencia al desgaste", tag: "ISO 6722-1 CLASE 3" }
       ] }
   ];
+
+  // ---------- WhatsApp ----------
+  // Número con código de país, solo dígitos (ej. Perú: "51987654321").
+  // Vacío = WhatsApp pide elegir el contacto.
+  const WHATSAPP_NUMBER = "";
+  const WHATSAPP_TEXT = "Hola, quiero información sobre los productos cordex.";
 
   // ---------- elements ----------
   const video = document.getElementById("heroVideo");
@@ -344,6 +371,8 @@ button, a { font-family: inherit; color: inherit; }
   const boot = document.getElementById("boot");
   const bootBar = document.getElementById("bootBar");
   const bootPct = document.getElementById("bootPct");
+  const waBtn = document.getElementById("waBtn");
+  waBtn.href = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(WHATSAPP_TEXT);
 
   // ---------- helpers / constants ----------
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
@@ -393,7 +422,7 @@ button, a { font-family: inherit; color: inherit; }
 
   function setBootProgress(fraction) {
     bootBar.style.transform = "scaleX(" + fraction + ")";
-    bootPct.textContent = "LOADING " + Math.round(fraction * 100) + "%";
+    bootPct.textContent = "CARGANDO " + Math.round(fraction * 100) + "%";
   }
 
   function start() {
@@ -479,7 +508,7 @@ button, a { font-family: inherit; color: inherit; }
       html += `<div class="spec"><b></b><div><small>${s.k}</small>${s.tag ? `<span class="tag">${s.tag}</span>` : `<span>${s.v}</span>`}</div></div>`;
     });
     if (item.colors) {
-      html += `<div class="spec"><b></b><div><small>Supplied in</small><div class="swatches">${item.colors.map((c) => `<i style="background:${c}"></i>`).join("")}</div></div></div>`;
+      html += `<div class="spec"><b></b><div><small>Disponible en</small><div class="swatches">${item.colors.map((c) => `<i style="background:${c}"></i>`).join("")}</div></div></div>`;
     }
     card.innerHTML = html;
     more.textContent = item.more;
